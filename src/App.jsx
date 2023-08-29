@@ -1,16 +1,16 @@
-import Search from './components/search/Search';
-import './App.css';
-import CurrentWeather from './components/current-weather/CurrentWeather';
-import { WEATHER_API_URL, WEATHER_API_KEY } from './api';
-import { useState } from 'react';
-import Forecast from './components/forecast/Forecast';
+import { useState } from "react";
+import Search from "./components/search/Search";
+import CurrentWeather from "./components/current-weather/CurrentWeather";
+import { WEATHER_API_URL, WEATHER_API_KEY } from "./api";
+import Forecast from "./components/forecast/Forecast";
+import "./App.css";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
 
   const handleOnSearchChange = (searchData) => {
-    const [lat, lon] = searchData.value.split(' ');
+    const [lat, lon] = searchData.value.split(" ");
 
     // this for the current weather
     const currentWeatherFetch = fetch(
@@ -34,11 +34,23 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <Search onSearchChange={handleOnSearchChange} />
-      {currentWeather && <CurrentWeather data={currentWeather} />}
-      {forecast && <Forecast data={forecast} />}
-    </div>
+    <>
+      <header className="header">
+        <nav className="header_nav">
+          <h1 className="header_nav-text">React Weather Forecast</h1>
+        </nav>
+      </header>
+      <main>
+        <section className="container">
+          <Search onSearchChange={handleOnSearchChange} />
+          {currentWeather && <CurrentWeather data={currentWeather} />}
+          {forecast && <Forecast data={forecast} />}
+        </section>
+      </main>
+      <footer className="footer">
+        <h5>Developed by Vaibhav Shukla</h5>
+      </footer>
+    </>
   );
 }
 
